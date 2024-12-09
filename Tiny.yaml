@@ -16,7 +16,7 @@ proxy-providers:
 
 
   1_我的_Vless:
-    type: "http"
+    2type: "http"
     interval: 3600
     health-check:
       enable: true

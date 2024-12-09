@@ -1,0 +1,532 @@
+proxy-providers:
+  0_69云:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 36000000
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+      additional-prefix: "💰."
+    proxy: "国外"
+    url: "https://checkhere.top/link/UH5NZhzShnPzMyoA?clash=1"
+
+
+  1_我的_Vless:
+    type: "http"
+    interval: 3600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true      
+    proxy: "国外"
+ #   url: "https://vless.8860886.xyz/4c99eaf9-e24d-4fbc-a6cc-582b38e6f0c6?sub=subcopy.chris2025.us.kg"
+    url: "https://vless.8860886.xyz/4c99eaf9-e24d-4fbc-a6cc-582b38e6f0c6?sub=chrissub.8860886.xyz"
+
+
+  2_Fxxk_天诚_Trojan:
+    type: "http"
+    interval: 3600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+      additional-prefix: "T."
+      proxy-name:
+      - pattern: "🐲™️【请勿测速】"
+        target: ""
+      - pattern: "美国"
+        target: "CF"
+      - pattern: "联通"
+        target: "CF"
+    exclude-filter: "(?i)周润发|TG|频道|IPV6|127.0.0.1|nat|订阅|群组|官方优选|加拿大|电信"
+    exclude-type: "hysteria2"
+    proxy: "国外"
+    url: "https://fxxktrojan.chris2024.us.kg/yzc?sub=altrojan.comorg.us.kg"
+#    url: "http://altrojan.comorg.us.kg/TCorg"
+
+
+  3.1_白嫖机场:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+    proxy: "国外"
+    url: "https://qq.xlm.plus/api/v1/client/subscribe?token=9e5db95336ab586ac6c4e2306c4d25a9"
+
+
+  3.2_白嫖机场:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+    proxy: "国外"
+    url: "https://yfjc.xyz/api/v1/client/subscribe?token=44dd3b4f5200a7ed052565f3267c44c4"
+
+
+  3.3_白嫖机场:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+    proxy: "国外"
+    url: "https://sub.tuanzi.site/api/v1/client/subscribe?token=2839d7da7b29f4749208831e0ba0a20f"
+
+  3.4_白嫖机场:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+    proxy: "国外"
+    url: "https://sub.yifenjichang.online/api/v1/client/subscribe?token=083fa54150692a37257161862bd01516"
+
+  3.5_白嫖机场:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+    proxy: "国外"
+    url: "https://app.legeth.cc/api/v1/client/subscribe?token=56c57ab6264a27c00e34fbeba35abbdd"
+
+
+  4_手动精选:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+      additional-prefix: "手."
+    proxy: "国外"
+    url: "https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/BUSHILIAN.txt?token=Cogtoq-sekmop-7cyxwe"
+
+  5_COLLECTOR爬取:
+    type: "http"
+    interval: 600
+    health-check:
+      enable: true
+      url: "http://www.gstatic.com/generate_204"
+      interval: 3600
+      timeout: 5000
+      lazy: true
+    override:
+      skip-cert-verify: true
+      additional-prefix: "爬."
+    
+    exclude-filter: "俄罗斯"
+    proxy: "国外"
+    url: "https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/COLLECTOR.yaml?token=Cogtoq-sekmop-7cyxwe"
+
+
+# 用于下载订阅时指定UA
+#global-ua: mihomo/1.18.10
+global-ua: clash.meta
+
+
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.19.0.1/16
+  listen: 0.0.0.0:7874
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+  - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.local"
+  - "*.home.arpa"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time-ios.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.xiami.com"
+  - "*.music.migu.cn"
+  - music.migu.cn
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.qq.com"
+  - "+.tencent.com"
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - proxy.golang.org
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - heartbeat.belkin.com
+  - "*.linksys.com"
+  - "*.linksyssmartwifi.com"
+  - "*.router.asus.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - na.b.g-tun.com
+  - "+.nflxvideo.net"
+  - "*.square-enix.com"
+  - "*.finalfantasyxiv.com"
+  - "*.ffxiv.com"
+  - "*.ff14.sdo.com"
+  - ff.dorado.sdo.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.media.dssott.com"
+  - shark007.net
+  - Mijia Cloud
+  - "+.cmbchina.com"
+  - "+.cmbimg.com"
+  - local.adguard.org
+  - "+.sandai.net"
+  - "+.n0808.com"
+  - "+.services.googleapis.cn"
+  - geosite:cn
+  nameserver:
+  - dhcp://"pppoe-wan"
+  - 10.91.0.1
+  - 116.116.116.116
+  - 221.5.88.88
+  - 127.0.0.1:1745
+redir-port: 7892
+tproxy-port: 7895
+mixed-port: 7893
+disable-keep-alive: true
+secret: jPfa60Gk
+bind-address: "*"
+external-ui: "/usr/share/openclash/ui"
+ipv6: false
+geodata-loader: standard
+tcp-concurrent: true
+unified-delay: true
+sniffer:
+  enable: true
+  parse-pure-ip: true
+tun:
+  enable: true
+  stack: mixed
+  device: utun
+  dns-hijack:
+  - tcp://any:53
+  auto-route: false
+  auto-detect-interface: false
+  auto-redirect: false
+  strict-route: false
+profile:
+  store-selected: true
+  store-fake-ip: true
+experimental:
+  sniff-tls-sni: false
+
+
+
+proxy-groups:
+
+  - name: 国外
+    type: select
+    proxies: [我的, 视频, Hysteria2, SS, Trojan, Vmess, CF均衡, CF手动, 美国, 香港, 台湾, 日本, 新加坡, 韩国, 其他, 手动, 白嫖的, 69云, REJECT]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/global.svg?token=Cogtoq-sekmop-7cyxwe
+
+  - name: 视频
+    type: select
+    proxies: [美国CF, 美国, 手动, 我的CF均衡, 我的CF手动, CF均衡, CF手动, 白嫖的, Hysteria2, SS, Trojan, Vmess, 69云]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/video.svg?token=Cogtoq-sekmop-7cyxwe
+
+  - name: TikTok
+    type: select
+    proxies: [美国CF, 美国, 视频, 国外, 手动, 69云]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/tiktok.svg?token=Cogtoq-sekmop-7cyxwe
+
+  - name: YouTube
+    type: select
+    proxies: [美国CF, 美国, 视频, 国外, 手动, 69云]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/youtube.svg?token=Cogtoq-sekmop-7cyxwe
+
+  - name: 𝕩 Twitter
+    type: select
+    proxies: [视频, 国外, 手动, 69云]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/twitter.svg?token=Cogtoq-sekmop-7cyxwe
+    
+
+  - name: iCloud
+    type: select
+    proxies: [国外, DIRECT, 视频, CF均衡, CF手动, 美国, 手动, 69云]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/apple.svg?token=Cogtoq-sekmop-7cyxwe
+
+#  - name: Ⓜ️ 微软
+#    type: select
+#    proxies: [DIRECT, 国外, 美国, 香港, 台湾, 日本, 新加坡, 韩国, 其他, 手动, REJECT]
+
+
+
+  - name: AI
+    type: select
+    proxies: [我的, 手动, 美国, 国外, 69云]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/ai.svg?token=Cogtoq-sekmop-7cyxwe
+
+#  - name: 流媒体
+#    type: select
+#    proxies: [国外, 美国, 香港, 台湾, 日本, 新加坡, 韩国, 其他, 手动, REJECT]
+
+  - name: 苹果CN
+    type: select
+    proxies: [DIRECT, 国外, 视频, CF均衡, CF手动, 美国, 手动, 69云]
+    hidden: true
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/apple.svg?token=Cogtoq-sekmop-7cyxwe
+
+  - name: 漏网
+    type: select
+    proxies: [国外, DIRECT, 我的, 视频, CF均衡, CF手动, 美国, 香港, 台湾, 日本, 新加坡, 韩国, 其他, 手动, 白嫖的, Hysteria2, SS, Trojan, Vmess, 69云, REJECT]
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/fish.svg?token=Cogtoq-sekmop-7cyxwe
+
+  - name: 国内
+    type: select
+    proxies: [DIRECT, 国外, 手动, REJECT]
+    hidden: true
+    icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/china.svg?token=Cogtoq-sekmop-7cyxwe
+
+
+
+
+
+#  - name: 广告
+#    type: select
+#    proxies: [REJECT]
+  - {name: 美国CF, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(?=.*CF)(?!.*(HK|uskg)).*(NAT|CMH|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|ATL|BUF|DFW|EWR|IAD|CMH|LAX|MCI|MIA|ORD|PHX|PDX|SEA|SJC|ORD|CA|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|广美|美|US|纽约|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|🇺🇸|United States)(?!.*HK)(?!.*uskg)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 50, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/us.svg?token=Cogtoq-sekmop-7cyxwe}
+  - {name: 美国, hidden: false, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(NAT|CMH|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|ATL|BUF|DFW|EWR|IAD|CMH|LAX|MCI|MIA|ORD|PHX|PDX|SEA|SJC|ORD|CA|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|广美|美|US|纽约|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|🇺🇸|United States)(?!.*HK)(?!.*uskg)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 50, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/us.svg?token=Cogtoq-sekmop-7cyxwe}
+
+  - {name: 我的CF手动, type: select, include-all: true, exclude-filter: "✨", filter: "(?i)(CF_|CF_IP|自建)", icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/cloudflare.svg?token=Cogtoq-sekmop-7cyxwe}
+  - {name: CF手动, type: select, include-all: true, exclude-filter: "✨", filter: "(?i)(CF_|CF_IP|CF)", icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/cloudflare.svg?token=Cogtoq-sekmop-7cyxwe}
+
+
+
+  - {name: 69云, type: select, use: [0_69云], icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/money.svg?token=Cogtoq-sekmop-7cyxwe}
+
+  - {name: 我的, type: url-test, use: [1_我的_Vless], url: "http://www.gstatic.com/generate_204", interval: 14400, tolerance: 80, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/my.svg?token=Cogtoq-sekmop-7cyxwe}
+
+  - {name: Hysteria2, type: fallback, include-all: true, exclude-type: "Shadowsocks|Http|Vless|Vmess|Trojan|ShadowsocksR", exclude-filter: "✨", url: "http://www.gstatic.com/generate_204", interval: 600, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/fast.svg?token=Cogtoq-sekmop-7cyxwe}
+  - {name: Vmess, type: fallback, include-all: true, exclude-type: "Shadowsocks|Http|Vless|Hysteria2|Trojan|ShadowsocksR", exclude-filter: "✨", url: "http://www.gstatic.com/generate_204", interval: 600, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/vmess.svg?token=Cogtoq-sekmop-7cyxwe}
+  - {name: SS, type: fallback, include-all: true, exclude-type: "Vmess|Http|Vless|Hysteria2|Trojan|ShadowsocksR", exclude-filter: "✨", url: "http://www.gstatic.com/generate_204", interval: 600, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/ss.svg?token=Cogtoq-sekmop-7cyxwe}
+  - {name: Trojan, type: fallback, include-all: true, exclude-type: "Shadowsocks|Http|Vless|Vmess|Hysteria2|ShadowsocksR", exclude-filter: "✨", url: "http://www.gstatic.com/generate_204", interval: 600, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/trojan.svg?token=Cogtoq-sekmop-7cyxwe}
+
+
+#####################   这个需要改use中的名字   ############################  
+  - {name: 白嫖的, type: url-test, use: [3.1_白嫖机场, 3.2_白嫖机场, 3.3_白嫖机场, 3.4_白嫖机场, 3.5_白嫖机场, 4_手动精选, 5_COLLECTOR爬取], url: "http://www.gstatic.com/generate_204", interval: 600, tolerance: 80, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/free.svg?token=Cogtoq-sekmop-7cyxwe}
+    
+  - {name: 手动, type: select, include-all: true, exclude-filter: "✨", icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/select.svg?token=Cogtoq-sekmop-7cyxwe}
+
+
+# 以下是隐藏的策略组
+  - {name: 香港, hidden: true, type: fallback, include-all: true, exclude-filter: "✨", filter: "(?i)(港|澳门|HK|hk|Hong Kong|HongKong|hongkong|MO|HKG|MFM|广港|香港|HK|Hong Kong|🇭🇰|HongKong)", url: "http://www.gstatic.com/generate_204", interval: 1800}
+  - {name: 台湾, hidden: true, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(台|新北|彰化|TW|Taiwan|TPE|KHH|广台|台湾|TW|Tai Wan|🇹🇼|TaiWan)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 80}
+
+  - {name: 日本, hidden: true, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan|Tokyo|NRT|KIX|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 80}
+  - {name: 新加坡, hidden: true, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(新加坡|坡|狮城|SG|Singapore|SIN|广新|🇸🇬)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 80}
+  - {name: 韩国, hidden: true, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(KR|Korea|KOR|Seoul|首尔|韩|韓|ICN|广韩|韩国|KR|首尔|春川|🇰🇷|Korea)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 80}
+  - {name: 其他, hidden: true, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(欧|EU|TLL|WAW|PL|CPH|DME|AMS|ARN|CDG|DE|FRA|LHR|NL|RKN|EUS|ACF|WMO|DCI|MAD|马耳他|荷兰|澳大利亚|英国|卢森堡|塞浦路斯|亚美尼亚|罗马尼亚|哈萨克斯坦|俄罗斯联邦|乌克兰|阿联酋|德国|法国|意大利|土耳其|沙特|冰岛|印度|摩尔多瓦|俄罗斯|波兰|保加利亚|罗马尼亚|拉脱维亚|爱沙尼亚|立陶宛|丹麦|瑞典|芬兰|挪威|荷兰|法国|AU|SE|ES|DE|UK|柬埔寨|巴基斯坦|尼泊尔|维也纳|比利时|爱尔兰|立陶宛|秘鲁|土耳其|埃及|希腊|斯洛伐克|孟加拉|芬兰|阿联酋|英国|德国|南非|法国|墨西哥|印度|越南|俄罗斯|瑞士|瑞典|智利|巴西|沙特|西班牙|泰国)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 100}
+
+  - {name: CF均衡, hidden: true, type: load-balance, include-all: true, exclude-filter: "✨", filter: "(?i)(CF_|CF_IP|CF)", url: "http://www.gstatic.com/generate_204", interval: 7200, tolerance: 80}
+
+  - {name: 我的CF均衡, hidden: true, type: load-balance, include-all: true, exclude-filter: "✨", filter: "(?i)(CF_|CF_IP|自建)", url: "http://www.gstatic.com/generate_204", interval: 43200, tolerance: 80}
+
+rules:
+  - RULE-SET,Private_Domain,国内
+  - RULE-SET,My_Direct,国内
+  
+#  - RULE-SET,Apple_CN_Domain,国内
+
+  - RULE-SET,Telegram_Domain,YouTube
+  - RULE-SET,Telegram_ip,YouTube
+  
+  - RULE-SET,X_Domain,𝕩 Twitter
+  
+  - RULE-SET,My_HighSpeed,YouTube
+
+
+  - RULE-SET,My_Proxy,国外
+  
+  - RULE-SET,AI_1,AI
+  - RULE-SET,AI_2,AI
+  - RULE-SET,AI_3,AI
+  - RULE-SET,AI_4,AI
+  - RULE-SET,AI_5,AI
+
+  - RULE-SET,Tiktok_Domain,TikTok
+
+  - RULE-SET,iCloud_Domain,iCloud
+  
+  - RULE-SET,Youtube_Domain,YouTube
+  
+  - RULE-SET,Apple_CN_Domain,苹果CN
+  - RULE-SET,AppleTV_Domain,苹果CN
+  - RULE-SET,AppleMusic_Domain,苹果CN
+  
+  - RULE-SET,Google_Domain,国外
+#  - RULE-SET,Onedrive_Domain,🐬 OneDrive
+#  - RULE-SET,Microsoft_Domain,Ⓜ️ 微软
+  - RULE-SET,Github_Domain,国外
+#  - RULE-SET,speedtest_domain,✈️ Speedtest
+#  - RULE-SET,Telegram_Domain,📲 Telegram
+#  - RULE-SET,Netflix_Domain,🎥 NETFLIX
+#  - RULE-SET,Paypal_Domain,💶 PayPal
+  - RULE-SET,geolocation-!cn,国外
+  - RULE-SET,CN_Domain,国内
+  - RULE-SET,Google_ip,国外,no-resolve
+#  - RULE-SET,Google_ip,🍀 Google,no-resolve
+#  - RULE-SET,Netflix_ip,🎥 NETFLIX,no-resolve,no-resolve
+#  - RULE-SET,Telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,CN_ip,国内
+  - MATCH,漏网
+
+
+rule-anchor:
+  ip: &ip {type: http, interval: 3600, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 3600, behavior: domain, format: mrs}
+  domaintext: &domaintext {type: http, interval: 3600, behavior: domain, format: text}
+  class: &class {type: http, interval: 3600, behavior: classical, format: text}
+
+
+rule-providers: 
+  Private_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  
+  My_Direct: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/chrisFxxk/Clash/refs/heads/main/my_Direct.list?token=Cogtoq-sekmop-7cyxwe" }
+  My_Proxy: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/chrisFxxk/Clash/refs/heads/main/my_Proxy.list?token=Cogtoq-sekmop-7cyxwe" }
+  My_HighSpeed: { <<: *domaintext, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/chrisFxxk/Clash/refs/heads/main/my_Video.list?token=Cogtoq-sekmop-7cyxwe" }
+
+  #proxylite: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/qcyhub/rule/master/ProxyLite.list?token=Cogtoq-sekmop-7cyxwe" }
+  
+  AI_1: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/chrisFxxk/Clash/refs/heads/main/my_US.list?token=Cogtoq-sekmop-7cyxwe" }
+  AI_2: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Gemini/Gemini.list?token=Cogtoq-sekmop-7cyxwe" }
+  AI_3: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OpenAI/OpenAI.list?token=Cogtoq-sekmop-7cyxwe" }
+  AI_4: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Copilot/Copilot.list?token=Cogtoq-sekmop-7cyxwe" }
+  AI_5: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Claude/Claude.list?token=Cogtoq-sekmop-7cyxwe" }
+  X_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/x.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Youtube_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Google_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Github_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Netflix_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Paypal_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Onedrive_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Microsoft_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Apple_CN_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  iCloud_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/icloud.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  AppleMusic_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/applemusic.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  AppleTV_Domain: { <<: *class, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AppleTV/AppleTV.list?token=Cogtoq-sekmop-7cyxwe" }
+  speedtest_domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Tiktok_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  geolocation-!cn: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  CN_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  CN_ip: { <<: *ip, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Google_ip: { <<: *ip, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Telegram_Domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Telegram_ip: { <<: *ip, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs?token=Cogtoq-sekmop-7cyxwe" }
+  Netflix_ip: { <<: *ip, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs?token=Cogtoq-sekmop-7cyxwe" }
+#  gfw_domain: { <<: *domain, url: "https://raw.8860886.xyz/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs?token=Cogtoq-sekmop-7cyxwe" }

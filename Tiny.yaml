@@ -394,12 +394,12 @@ proxy-groups:
     icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/china.svg?token=Cogtoq-sekmop-7cyxwe
 
 
-
-
-
 #  - name: 广告
 #    type: select
 #    proxies: [REJECT]
+
+
+
   - {name: 美国CF, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(?=.*CF)(?!.*(HK|uskg)).*(NAT|CMH|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|ATL|BUF|DFW|EWR|IAD|CMH|LAX|MCI|MIA|ORD|PHX|PDX|SEA|SJC|ORD|CA|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|广美|美|US|纽约|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|🇺🇸|United States)(?!.*HK)(?!.*uskg)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 50, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/us.svg?token=Cogtoq-sekmop-7cyxwe}
   - {name: 美国, hidden: false, type: url-test, include-all: true, exclude-filter: "✨", filter: "(?i)(NAT|CMH|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|ATL|BUF|DFW|EWR|IAD|CMH|LAX|MCI|MIA|ORD|PHX|PDX|SEA|SJC|ORD|CA|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|广美|美|US|纽约|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|🇺🇸|United States)(?!.*HK)(?!.*uskg)", url: "http://www.gstatic.com/generate_204", interval: 1800, tolerance: 50, icon: https://raw.8860886.xyz/chrisFxxk/ChrissubIPs/refs/heads/main/icon/us.svg?token=Cogtoq-sekmop-7cyxwe}
 

@@ -1,4 +1,4 @@
-DOMAIN-SUFFIX,v2ex.com
+#不使用CF则无需此项 DOMAIN-SUFFIX,v2ex.com
 
-DOMAIN-SUFFIX,ip.sb
+#不使用CF则无需此项 DOMAIN-SUFFIX,ip.sb
 

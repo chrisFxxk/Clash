@@ -1,15 +1,12 @@
 DOMAIN-SUFFIX,news.google.com
-DOMAIN-SUFFIX,labs.google
-# DOMAIN-SUFFIX,accounts.google.com
 
-DOMAIN-SUFFIX,signaler-pa.clients6.google.com
-
-DOMAIN-SUFFIX,aisandbox-pa.googleapis.com
-
-# DOMAIN-SUFFIX,support.google.com
-
-
-# DOMAIN-SUFFIX,mtalk.google.com
 
 DOMAIN-SUFFIX,onedrive.com
 DOMAIN-SUFFIX,api.github.com
+
+
+# 以下3个域名与googlelabs相关，由于很多地区没有开放使用labs服务，所以暂时使用US(2025年3月23日22:25:12)
+DOMAIN-SUFFIX,labs.google
+DOMAIN-SUFFIX,signaler-pa.clients6.google.com
+DOMAIN-SUFFIX,aisandbox-pa.googleapis.com
+####

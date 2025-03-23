@@ -5,7 +5,7 @@ DOMAIN-SUFFIX,accounts.google.com
 
 # aisandbox-pa.googleapis.com
 
-# support.google.com
+DOMAIN-SUFFIX,support.google.com
 
 
 DOMAIN-SUFFIX,mtalk.google.com

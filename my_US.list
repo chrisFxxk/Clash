@@ -2,5 +2,13 @@ DOMAIN-SUFFIX,news.google.com
 DOMAIN-SUFFIX,labs.google
 DOMAIN-SUFFIX,accounts.google.com
 
+
+# aisandbox-pa.googleapis.com
+
+# support.google.com
+
+
+DOMAIN-SUFFIX,mtalk.google.com
+
 DOMAIN-SUFFIX,onedrive.com
 DOMAIN-SUFFIX,api.github.com

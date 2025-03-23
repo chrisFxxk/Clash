@@ -1,15 +1,15 @@
 DOMAIN-SUFFIX,news.google.com
 DOMAIN-SUFFIX,labs.google
-DOMAIN-SUFFIX,accounts.google.com
+# DOMAIN-SUFFIX,accounts.google.com
 
 DOMAIN-SUFFIX,signaler-pa.clients6.google.com
 
 DOMAIN-SUFFIX,aisandbox-pa.googleapis.com
 
-DOMAIN-SUFFIX,support.google.com
+# DOMAIN-SUFFIX,support.google.com
 
 
-DOMAIN-SUFFIX,mtalk.google.com
+# DOMAIN-SUFFIX,mtalk.google.com
 
 DOMAIN-SUFFIX,onedrive.com
 DOMAIN-SUFFIX,api.github.com

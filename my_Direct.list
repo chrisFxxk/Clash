@@ -22,7 +22,7 @@ DOMAIN-SUFFIX,emby.69yun69.com
 DOMAIN-SUFFIX,emby1.69yun69.com
 
 #下面这个是subscheck的测速链接，需要屏蔽
-DOMAIN-KEYWORD,AaronFeng753
+DOMAIN-KEYWORD,Waifu2x-Extension-GUI-v2.21.12-Portable
 
 # 更新订阅链接的域名直连
 DOMAIN-KEYWORD,onflashdrive

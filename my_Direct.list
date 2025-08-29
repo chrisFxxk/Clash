@@ -2,7 +2,7 @@
 DOMAIN-KEYWORD,gspe
 DOMAIN-KEYWORD,gsp64
 
-IP-CIDR,192.168.100.239/32
+# IP-CIDR,192.168.100.239/32
 
 DOMAIN-KEYWORD,iosapp
 DOMAIN-SUFFIX,notion.so
@@ -16,6 +16,8 @@ DOMAIN-SUFFIX,flares.cloud
 DOMAIN-KEYWORD,xiaoya
 DOMAIN-SUFFIX,ip-api.com
 DOMAIN-KEYWORD,macromicro
+
+DOMAIN-SUFFIX,iconify.design
 
 DOMAIN-KEYWORD,thisamericanlife
 # DOMAIN-SUFFIX,emby.69yun69.com

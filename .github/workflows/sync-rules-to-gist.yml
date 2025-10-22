@@ -1,14 +1,9 @@
 name: Sync Remote Rules to Gist
 
 on:
-  # 每天0点10分执行
   schedule:
-    - cron: '10 0 * * *'  # UTC 时间 0:10，北京时间 8:10
-  
-  # 支持手动触发
+    - cron: '10 0 * * *'
   workflow_dispatch:
-  
-  # 配置文件更新时也触发
   push:
     paths:
       - '.github/rules-urls.txt'
@@ -37,7 +32,7 @@ jobs:
         run: |
           git clone https://${GIST_TOKEN}@gist.github.com/${GIST_ID}.git gist-repo
       
-      - name: 下载远程规则文件
+      - name: 下载远程规则文件（智能命名）
         run: |
           CONFIG_FILE=".github/rules-urls.txt"
           
@@ -46,11 +41,8 @@ jobs:
           echo "=========================================="
           echo ""
           
-          # 检查配置文件是否存在
           if [ ! -f "$CONFIG_FILE" ]; then
             echo "❌ 配置文件不存在: $CONFIG_FILE"
-            echo ""
-            echo "请创建配置文件并添加规则文件的URL"
             exit 1
           fi
           
@@ -61,40 +53,71 @@ jobs:
           FAILED=0
           SKIPPED=0
           
-          # 创建临时目录
           mkdir -p /tmp/downloaded_rules
           
-          # 读取配置文件，下载每个URL
+          # 用于跟踪文件名冲突
+          declare -A filename_map
+          
           while IFS= read -r line || [ -n "$line" ]; do
-            # 去除前后空格
             url=$(echo "$line" | xargs)
             
-            # 跳过空行和注释行
             [[ -z "$url" || "$url" =~ ^# ]] && continue
             
-            # 从URL中提取文件名
-            filename=$(basename "$url")
+            # 从URL中提取基础文件名
+            base_filename=$(basename "$url" | cut -d'?' -f1)
             
-            # 如果URL包含查询参数，去除它们
-            filename=$(echo "$filename" | cut -d'?' -f1)
+            # 从URL中提取路径信息用于区分
+            # 例如: geo/geosite/cn.mrs -> geosite-cn.mrs
+            #       geo/geoip/cn.mrs -> geoip-cn.mrs
+            url_path=$(echo "$url" | sed 's|https\?://[^/]*/||' | sed 's|/[^/]*$||')
             
-            echo "📥 下载: $filename"
+            # 智能生成文件名
+            if [[ "$url_path" =~ geoip ]]; then
+              # geoip 文件添加 geoip- 前缀
+              final_filename="geoip-${base_filename}"
+            elif [[ "$url_path" =~ geosite ]]; then
+              # geosite 文件添加 geosite- 前缀
+              final_filename="geosite-${base_filename}"
+            else
+              # 其他文件保持原名
+              final_filename="$base_filename"
+            fi
+            
+            # 检查文件名是否已存在
+            if [[ -n "${filename_map[$final_filename]}" ]]; then
+              echo "⚠️  警告: 文件名冲突 $final_filename"
+              echo "   URL1: ${filename_map[$final_filename]}"
+              echo "   URL2: $url"
+              echo "   将使用计数后缀"
+              
+              # 添加计数后缀
+              count=2
+              temp_filename="${final_filename%.*}_${count}.${final_filename##*.}"
+              while [[ -n "${filename_map[$temp_filename]}" ]]; do
+                count=$((count + 1))
+                temp_filename="${final_filename%.*}_${count}.${final_filename##*.}"
+              done
+              final_filename="$temp_filename"
+            fi
+            
+            # 记录文件名映射
+            filename_map[$final_filename]="$url"
+            
+            echo "📥 下载: $final_filename"
+            if [[ "$final_filename" != "$base_filename" ]]; then
+              echo "   原名: $base_filename"
+            fi
             echo "   URL: $url"
             
-            # 使用 curl 下载文件
-            if curl -fsSL -o "/tmp/downloaded_rules/$filename" "$url" --connect-timeout 30 --max-time 120; then
-              # 验证文件不为空
-              if [ -s "/tmp/downloaded_rules/$filename" ]; then
-                # 复制到 Gist 目录
-                cp "/tmp/downloaded_rules/$filename" "gist-repo/$filename"
-                
-                # 获取文件大小
-                size=$(du -h "gist-repo/$filename" | cut -f1)
+            if curl -fsSL -o "/tmp/downloaded_rules/$final_filename" "$url" --connect-timeout 30 --max-time 120; then
+              if [ -s "/tmp/downloaded_rules/$final_filename" ]; then
+                cp "/tmp/downloaded_rules/$final_filename" "gist-repo/$final_filename"
+                size=$(du -h "gist-repo/$final_filename" | cut -f1)
                 echo "   ✓ 成功 ($size)"
                 SUCCESS=$((SUCCESS + 1))
               else
                 echo "   ⚠ 文件为空，跳过"
-                rm -f "/tmp/downloaded_rules/$filename"
+                rm -f "/tmp/downloaded_rules/$final_filename"
                 SKIPPED=$((SKIPPED + 1))
               fi
             else
@@ -125,13 +148,29 @@ jobs:
           
           DELETED=0
           
-          # 从配置文件中提取所有文件名
-          EXPECTED_FILES=$(grep -v '^#' "../$CONFIG_FILE" | grep -v '^$' | xargs -I {} basename {} | cut -d'?' -f1)
+          # 生成预期的文件列表（应用相同的命名规则）
+          EXPECTED_FILES=""
+          while IFS= read -r line || [ -n "$line" ]; do
+            url=$(echo "$line" | xargs)
+            [[ -z "$url" || "$url" =~ ^# ]] && continue
+            
+            base_filename=$(basename "$url" | cut -d'?' -f1)
+            url_path=$(echo "$url" | sed 's|https\?://[^/]*/||' | sed 's|/[^/]*$||')
+            
+            if [[ "$url_path" =~ geoip ]]; then
+              final_filename="geoip-${base_filename}"
+            elif [[ "$url_path" =~ geosite ]]; then
+              final_filename="geosite-${base_filename}"
+            else
+              final_filename="$base_filename"
+            fi
+            
+            EXPECTED_FILES="${EXPECTED_FILES}${final_filename}"$'\n'
+          done < "../$CONFIG_FILE"
           
-          # 检查 Gist 中的每个文件
+          # 检查并删除不在列表中的文件
           for gist_file in $(find . -type f -not -path "./.git/*" | sed 's|^\./||'); do
-            # 检查该文件是否在预期列表中
-            if ! echo "$EXPECTED_FILES" | grep -q "^${gist_file}$"; then
+            if ! echo "$EXPECTED_FILES" | grep -qx "$gist_file"; then
               rm -f "$gist_file"
               echo "  ✗ 已删除: $gist_file （未在配置中）"
               DELETED=$((DELETED + 1))
@@ -157,7 +196,7 @@ jobs:
           echo ""
           
           if [ -n "$(ls -A . 2>/dev/null | grep -v '^\.git$')" ]; then
-            find . -type f -not -path "./.git/*" | while read file; do
+            find . -type f -not -path "./.git/*" | sort | while read file; do
               filename=$(basename "$file")
               size=$(du -h "$file" | cut -f1)
               lines=$(wc -l < "$file" 2>/dev/null || echo "0")
@@ -196,41 +235,7 @@ jobs:
             MODIFIED=$(git diff --staged --name-only --diff-filter=M | wc -l)
             DELETED=$(git diff --staged --name-only --diff-filter=D | wc -l)
             
-            # 创建详细的提交信息
-            cat > /tmp/commit_msg.txt << 'EOF'
-          Auto-sync rules at $(date -u '+%Y-%m-%d %H:%M:%S UTC')
-          
-          Changes: +ADDED_COUNT ~MODIFIED_COUNT -DELETED_COUNT
-          EOF
-            
-            # 替换占位符
-            sed -i "s/\$(date -u '+%Y-%m-%d %H:%M:%S UTC')/$(date -u '+%Y-%m-%d %H:%M:%S UTC')/g" /tmp/commit_msg.txt
-            sed -i "s/ADDED_COUNT/${ADDED}/g" /tmp/commit_msg.txt
-            sed -i "s/MODIFIED_COUNT/${MODIFIED}/g" /tmp/commit_msg.txt
-            sed -i "s/DELETED_COUNT/${DELETED}/g" /tmp/commit_msg.txt
-            
-            # 添加变更详情
-            if [ $ADDED -gt 0 ]; then
-              echo "" >> /tmp/commit_msg.txt
-              echo "Added:" >> /tmp/commit_msg.txt
-              git diff --staged --name-only --diff-filter=A | sed 's/^/  - /' >> /tmp/commit_msg.txt
-            fi
-            
-            if [ $MODIFIED -gt 0 ]; then
-              echo "" >> /tmp/commit_msg.txt
-              echo "Modified:" >> /tmp/commit_msg.txt
-              git diff --staged --name-only --diff-filter=M | sed 's/^/  - /' >> /tmp/commit_msg.txt
-            fi
-            
-            if [ $DELETED -gt 0 ]; then
-              echo "" >> /tmp/commit_msg.txt
-              echo "Deleted:" >> /tmp/commit_msg.txt
-              git diff --staged --name-only --diff-filter=D | sed 's/^/  - /' >> /tmp/commit_msg.txt
-            fi
-            
-            git commit -F /tmp/commit_msg.txt
-            rm /tmp/commit_msg.txt
-            
+            git commit -m "Sync: +$ADDED ~$MODIFIED -$DELETED @ $(date -u '+%Y-%m-%d %H:%M')"
             echo "HAS_CHANGES=true" >> $GITHUB_ENV
           fi
       

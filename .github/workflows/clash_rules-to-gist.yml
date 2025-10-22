@@ -76,7 +76,7 @@ jobs:
         working-directory: ./gist-repo
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: 'bfbda77f85d8a59156fee9947f442f55'  # 与上面相同的 Gist ID
+          GIST_ID: ${{ secrets.CLASH_RULES_GIST_ID }}  # 与上面相同的 Gist ID
         run: |
           git remote set-url origin https://${GIST_TOKEN}@gist.github.com/${GIST_ID}.git
           git pull --rebase origin master || git pull --rebase origin main

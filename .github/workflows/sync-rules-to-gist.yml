@@ -33,7 +33,7 @@ jobs:
       - name: 克隆 Gist
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: ${{ secrets.CLASH_RULES_GIST_ID }}
+          GIST_ID: ${{ secrets.REMOTE_CLASH_RULES_GIST_ID }}
         run: |
           git clone https://${GIST_TOKEN}@gist.github.com/${GIST_ID}.git gist-repo
       

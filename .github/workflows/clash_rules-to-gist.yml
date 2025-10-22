@@ -3,7 +3,7 @@ name: Sync Clash Rules Files to Gist
 on:
   push:
     paths:
-      - '**.list'  # 监控所有 .list 文件（包括子目录）
+      - '**.list'
     branches:
       - main
   
@@ -17,7 +17,7 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整历史，用于检测删除的文件
+          fetch-depth: 0
           persist-credentials: false
       
       - name: 配置 Git
@@ -47,16 +47,12 @@ jobs:
           
           # 查找所有 .list 文件（排除 gist-repo 目录）
           find . -name "*.list" -not -path "./gist-repo/*" -not -path "./.git/*" | while read file; do
-            # 获取文件名（不含路径）
             filename=$(basename "$file")
-            
-            # 复制到 gist-repo
             cp "$file" "gist-repo/$filename"
             echo "  ✓ 已同步: $filename"
             COPIED_COUNT=$((COPIED_COUNT + 1))
           done
           
-          # 统计复制的文件数
           ACTUAL_COPIED=$(find . -name "*.list" -not -path "./gist-repo/*" -not -path "./.git/*" | wc -l)
           echo ""
           echo "  📊 共复制 $ACTUAL_COPIED 个 .list 文件"
@@ -68,13 +64,10 @@ jobs:
           
           DELETED_COUNT=0
           
-          # 检查 Gist 中的每个 .list 文件
           cd gist-repo
           for gist_file in *.list 2>/dev/null; do
-            # 检查文件是否真实存在（不是通配符本身）
             [ -e "$gist_file" ] || continue
             
-            # 检查该文件是否在源仓库中存在
             if [ ! -f "../$gist_file" ]; then
               rm -f "$gist_file"
               echo "  ✗ 已删除: $gist_file （源仓库中已不存在）"
@@ -129,36 +122,38 @@ jobs:
             MODIFIED=$(git diff --staged --name-only --diff-filter=M | wc -l)
             DELETED=$(git diff --staged --name-only --diff-filter=D | wc -l)
             
-            COMMIT_MSG="Auto-sync at $(date -u '+%Y-%m-%d %H:%M:%S UTC')
-
-📊 变更统计:
-  ➕ 新增: $ADDED 个文件
-  ✏️  修改: $MODIFIED 个文件
-  ➖ 删除: $DELETED 个文件"
+            # 使用 heredoc 方式创建多行提交信息
+            cat > /tmp/commit_msg.txt << EOF
+          Auto-sync at $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          
+          Changes: +${ADDED} ~${MODIFIED} -${DELETED}
+          EOF
             
-            # 列出具体变更的文件
+            # 如果有新增文件，添加列表
             if [ $ADDED -gt 0 ]; then
-              COMMIT_MSG="$COMMIT_MSG
-
-➕ 新增文件:
-$(git diff --staged --name-only --diff-filter=A | sed 's/^/  - /')"
+              echo "" >> /tmp/commit_msg.txt
+              echo "Added files:" >> /tmp/commit_msg.txt
+              git diff --staged --name-only --diff-filter=A | sed 's/^/  - /' >> /tmp/commit_msg.txt
             fi
             
+            # 如果有修改文件，添加列表
             if [ $MODIFIED -gt 0 ]; then
-              COMMIT_MSG="$COMMIT_MSG
-
-✏️  修改文件:
-$(git diff --staged --name-only --diff-filter=M | sed 's/^/  - /')"
+              echo "" >> /tmp/commit_msg.txt
+              echo "Modified files:" >> /tmp/commit_msg.txt
+              git diff --staged --name-only --diff-filter=M | sed 's/^/  - /' >> /tmp/commit_msg.txt
             fi
             
+            # 如果有删除文件，添加列表
             if [ $DELETED -gt 0 ]; then
-              COMMIT_MSG="$COMMIT_MSG
-
-➖ 删除文件:
-$(git diff --staged --name-only --diff-filter=D | sed 's/^/  - /')"
+              echo "" >> /tmp/commit_msg.txt
+              echo "Deleted files:" >> /tmp/commit_msg.txt
+              git diff --staged --name-only --diff-filter=D | sed 's/^/  - /' >> /tmp/commit_msg.txt
             fi
             
-            git commit -m "$COMMIT_MSG"
+            # 使用文件内容作为提交信息
+            git commit -F /tmp/commit_msg.txt
+            rm /tmp/commit_msg.txt
+            
             echo "HAS_CHANGES=true" >> $GITHUB_ENV
           fi
       

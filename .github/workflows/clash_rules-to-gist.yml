@@ -1,25 +1,12 @@
 name: Sync Clash Rules Files to Gist
 
 on:
-  # 文件更新时立即推送
   push:
     paths:
-      - 'my_Alstudio.list'
-      - 'my_Direct.list'
-      - 'my_Emby_69.list'
-      - 'my_Gmail.list'
-      - 'my_Grok.list'
-      - 'my_Notebooklm.list'
-      - 'my_Perplexity.list'
-      - 'my_Proxy.list'
-      - 'my_Proxyip.list'
-      - 'my_US.list'
-      - 'my_Video.list'
-
+      - '**.list'  # 监控所有 .list 文件（包括子目录）
     branches:
-      - main  # 如果你的默认分支是 master，改成 master
+      - main
   
-  # 支持手动触发
   workflow_dispatch:
 
 jobs:
@@ -30,6 +17,7 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0  # 获取完整历史，用于检测删除的文件
           persist-credentials: false
       
       - name: 配置 Git
@@ -40,23 +28,88 @@ jobs:
       - name: 克隆 Gist
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: ${{ secrets.CLASH_RULES_GIST_ID }}  # 替换为第一步获取的 Gist ID
+          GIST_ID: ${{ secrets.CLASH_RULES_GIST_ID }}
         run: |
           git clone https://${GIST_TOKEN}@gist.github.com/${GIST_ID}.git gist-repo
       
-      - name: 复制文件到 Gist
+      - name: 智能同步（自动检测增删改）
         run: |
-          cp my_Alstudio.list gist-repo/ 2>/dev/null || echo "my_Alstudio.list not found"
-          cp my_Direct.list gist-repo/ 2>/dev/null || echo "my_Direct.list not found"
-          cp my_Emby_69.list gist-repo/ 2>/dev/null || echo "my_Emby_69.list not found"
-          cp my_Gmail.list gist-repo/ 2>/dev/null || echo "my_Gmail.list not found"
-          cp my_Grok.list gist-repo/ 2>/dev/null || echo "my_Grok.list not found"
-          cp my_Notebooklm.list gist-repo/ 2>/dev/null || echo "my_Notebooklm.list not found"
-          cp my_Perplexity.list gist-repo/ 2>/dev/null || echo "my_Perplexity.list not found"
-          cp my_Proxy.list gist-repo/ 2>/dev/null || echo "my_Proxy.list not found"
-          cp my_Proxyip.list gist-repo/ 2>/dev/null || echo "my_Proxyip.list not found"
-          cp my_US.list gist-repo/ 2>/dev/null || echo "my_US.list not found"
-          cp my_Video.list gist-repo/ 2>/dev/null || echo "my_Video.list not found"
+          echo "=========================================="
+          echo "🔍 开始智能同步 .list 文件"
+          echo "=========================================="
+          echo ""
+          
+          # ===== 第一步：复制所有当前存在的 .list 文件 =====
+          echo "📋 步骤 1: 扫描并复制所有 .list 文件"
+          echo ""
+          
+          COPIED_COUNT=0
+          
+          # 查找所有 .list 文件（排除 gist-repo 目录）
+          find . -name "*.list" -not -path "./gist-repo/*" -not -path "./.git/*" | while read file; do
+            # 获取文件名（不含路径）
+            filename=$(basename "$file")
+            
+            # 复制到 gist-repo
+            cp "$file" "gist-repo/$filename"
+            echo "  ✓ 已同步: $filename"
+            COPIED_COUNT=$((COPIED_COUNT + 1))
+          done
+          
+          # 统计复制的文件数
+          ACTUAL_COPIED=$(find . -name "*.list" -not -path "./gist-repo/*" -not -path "./.git/*" | wc -l)
+          echo ""
+          echo "  📊 共复制 $ACTUAL_COPIED 个 .list 文件"
+          echo ""
+          
+          # ===== 第二步：删除 Gist 中多余的文件 =====
+          echo "🗑️  步骤 2: 清理 Gist 中已删除的文件"
+          echo ""
+          
+          DELETED_COUNT=0
+          
+          # 检查 Gist 中的每个 .list 文件
+          cd gist-repo
+          for gist_file in *.list 2>/dev/null; do
+            # 检查文件是否真实存在（不是通配符本身）
+            [ -e "$gist_file" ] || continue
+            
+            # 检查该文件是否在源仓库中存在
+            if [ ! -f "../$gist_file" ]; then
+              rm -f "$gist_file"
+              echo "  ✗ 已删除: $gist_file （源仓库中已不存在）"
+              DELETED_COUNT=$((DELETED_COUNT + 1))
+            fi
+          done
+          cd ..
+          
+          if [ $DELETED_COUNT -eq 0 ]; then
+            echo "  ℹ️  无需删除文件"
+          else
+            echo ""
+            echo "  📊 共删除 $DELETED_COUNT 个过时文件"
+          fi
+          
+          echo ""
+          echo "=========================================="
+          echo "✅ 智能同步完成"
+          echo "=========================================="
+      
+      - name: 显示同步结果
+        working-directory: ./gist-repo
+        run: |
+          echo ""
+          echo "📦 Gist 中的文件列表："
+          echo ""
+          ls -lh *.list 2>/dev/null || echo "  (无 .list 文件)"
+          echo ""
+          
+          FILE_COUNT=$(ls -1 *.list 2>/dev/null | wc -l)
+          TOTAL_SIZE=$(du -sh . | cut -f1)
+          
+          echo "📊 统计信息："
+          echo "  文件数量: $FILE_COUNT"
+          echo "  总大小: $TOTAL_SIZE"
       
       - name: 提交更改
         working-directory: ./gist-repo
@@ -64,10 +117,48 @@ jobs:
           git add -A
           
           if git diff --staged --quiet; then
-            echo "没有变更，跳过"
+            echo ""
+            echo "ℹ️  没有变更，跳过推送"
             echo "HAS_CHANGES=false" >> $GITHUB_ENV
           else
-            git commit -m "Auto-sync at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo ""
+            echo "📝 检测到变更，准备提交..."
+            
+            # 生成详细的变更信息
+            ADDED=$(git diff --staged --name-only --diff-filter=A | wc -l)
+            MODIFIED=$(git diff --staged --name-only --diff-filter=M | wc -l)
+            DELETED=$(git diff --staged --name-only --diff-filter=D | wc -l)
+            
+            COMMIT_MSG="Auto-sync at $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+
+📊 变更统计:
+  ➕ 新增: $ADDED 个文件
+  ✏️  修改: $MODIFIED 个文件
+  ➖ 删除: $DELETED 个文件"
+            
+            # 列出具体变更的文件
+            if [ $ADDED -gt 0 ]; then
+              COMMIT_MSG="$COMMIT_MSG
+
+➕ 新增文件:
+$(git diff --staged --name-only --diff-filter=A | sed 's/^/  - /')"
+            fi
+            
+            if [ $MODIFIED -gt 0 ]; then
+              COMMIT_MSG="$COMMIT_MSG
+
+✏️  修改文件:
+$(git diff --staged --name-only --diff-filter=M | sed 's/^/  - /')"
+            fi
+            
+            if [ $DELETED -gt 0 ]; then
+              COMMIT_MSG="$COMMIT_MSG
+
+➖ 删除文件:
+$(git diff --staged --name-only --diff-filter=D | sed 's/^/  - /')"
+            fi
+            
+            git commit -m "$COMMIT_MSG"
             echo "HAS_CHANGES=true" >> $GITHUB_ENV
           fi
       
@@ -76,8 +167,16 @@ jobs:
         working-directory: ./gist-repo
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: ${{ secrets.CLASH_RULES_GIST_ID }}  # 与上面相同的 Gist ID
+          GIST_ID: ${{ secrets.CLASH_RULES_GIST_ID }}
         run: |
           git remote set-url origin https://${GIST_TOKEN}@gist.github.com/${GIST_ID}.git
           git pull --rebase origin master || git pull --rebase origin main
           git push origin HEAD
+          
+          echo ""
+          echo "=========================================="
+          echo "🎉 成功推送到 Gist！"
+          echo "=========================================="
+          echo ""
+          echo "📍 Gist 地址:"
+          echo "   https://gist.github.com/${GIST_ID}"

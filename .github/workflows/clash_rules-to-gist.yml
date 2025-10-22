@@ -46,11 +46,17 @@ jobs:
       
       - name: 复制文件到 Gist
         run: |
-          cp Crawler.yaml gist-repo/ 2>/dev/null || echo "Crawler.yaml not found"
-          cp URLs.txt gist-repo/ 2>/dev/null || echo "URLs.txt not found"
-          cp addURLs.txt gist-repo/ 2>/dev/null || echo "addURLs.txt not found"
-          cp all-proxies-backup.yaml gist-repo/ 2>/dev/null || echo "all-proxies-backup.yaml not found"
-          cp from_CF.txt gist-repo/ 2>/dev/null || echo "from_CF.txt not found"
+          cp my_Alstudio.list gist-repo/ 2>/dev/null || echo "my_Alstudio.list not found"
+          cp my_Direct.list gist-repo/ 2>/dev/null || echo "my_Direct.list not found"
+          cp my_Emby_69.list gist-repo/ 2>/dev/null || echo "my_Emby_69.list not found"
+          cp my_Gmail.list gist-repo/ 2>/dev/null || echo "my_Gmail.list not found"
+          cp my_Grok.list gist-repo/ 2>/dev/null || echo "my_Grok.list not found"
+          cp my_Notebooklm.list gist-repo/ 2>/dev/null || echo "my_Notebooklm.list not found"
+          cp my_Perplexity.list gist-repo/ 2>/dev/null || echo "my_Perplexity.list not found"
+          cp my_Proxy.list gist-repo/ 2>/dev/null || echo "my_Proxy.list not found"
+          cp my_Proxyip.list gist-repo/ 2>/dev/null || echo "my_Proxyip.list not found"
+          cp my_US.list gist-repo/ 2>/dev/null || echo "my_US.list not found"
+          cp my_Video.list gist-repo/ 2>/dev/null || echo "my_Video.list not found"
       
       - name: 提交更改
         working-directory: ./gist-repo

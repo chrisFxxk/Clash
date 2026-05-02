@@ -26,19 +26,18 @@ DOMAIN-KEYWORD,canopywave
 ###参考1：https://raw.githubusercontent.com/ttyyss2233/Tool/main/shadowrocket/mokuai/Apns.module
 ###参考2：https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list
 ###参考3：https://x.com/RocM301/status/2050477727862722791
-#目前2026-05-02我采用最小改动：DOMAIN-SUFFIX,push.apple.com
-# DOMAIN-SUFFIX,akadns.net,PROXY
-# DOMAIN-KEYWORD,apple.com.edgekey.net,PROXY
-
-# IP-CIDR,17.249.0.0/16
-# IP-CIDR,17.252.0.0/16
-# IP-CIDR,17.57.144.0/22
-# IP-CIDR,17.188.128.0/18
-# IP-CIDR,17.188.20.0/23
-
-# IP-CIDR6,2620:149:a44::/48
-# IP-CIDR6,2403:300:a42::/48
-# IP-CIDR6,2403:300:a51::/48
-# IP-CIDR6,2a01:b740:a42::/48
-
+#目前2026-05-02我采用最小改动，见下面：
 DOMAIN-SUFFIX,push.apple.com
+DOMAIN-SUFFIX,akadns.net,PROXY
+DOMAIN-KEYWORD,apple.com.edgekey.net,PROXY
+
+IP-CIDR,17.249.0.0/16
+IP-CIDR,17.252.0.0/16
+IP-CIDR,17.57.144.0/22
+IP-CIDR,17.188.128.0/18
+IP-CIDR,17.188.20.0/23
+
+IP-CIDR6,2620:149:a44::/48
+IP-CIDR6,2403:300:a42::/48
+IP-CIDR6,2403:300:a51::/48
+IP-CIDR6,2a01:b740:a42::/48

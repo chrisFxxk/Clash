@@ -34,3 +34,5 @@ https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tele
 https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
 https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
 https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs
+# 下面是券商的分流规则（富途牛牛和老虎证券）
+https://raw.githubusercontent.com/masnmarc/broker-rules/refs/heads/main/Broker.list

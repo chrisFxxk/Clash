@@ -22,6 +22,9 @@ DOMAIN-KEYWORD,z-lib
 DOMAIN-KEYWORD,canopywave
 
 
+# 富途牛牛
+IP-CIDR,124.156.124.226/32
+
 ### 2026年5月1日起，中国大陆苹果消息推送被阻问题
 ###参考1：https://raw.githubusercontent.com/ttyyss2233/Tool/main/shadowrocket/mokuai/Apns.module
 ###参考2：https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list

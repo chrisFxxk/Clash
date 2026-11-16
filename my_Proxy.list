@@ -24,6 +24,11 @@ DOMAIN-KEYWORD,canopywave
 DOMAIN-SUFFIX,cloudflare.com
 
 
+DOMAIN-SUFFIX,iconify.design
+
+
+
+
 ### 2026年5月1日起，中国大陆苹果消息推送被阻问题
 ###参考1：https://raw.githubusercontent.com/ttyyss2233/Tool/main/shadowrocket/mokuai/Apns.module
 ###参考2：https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list

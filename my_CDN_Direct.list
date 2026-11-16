@@ -1,0 +1,32 @@
+
+# GitHub 加速服务：直连
+DOMAIN-SUFFIX,gh-proxy.org
+DOMAIN-SUFFIX,gh-proxy.com
+DOMAIN-SUFFIX,ghfast.top
+DOMAIN-SUFFIX,ghproxy.net
+DOMAIN-SUFFIX,ghproxy.com
+DOMAIN-SUFFIX,ghproxy.cc
+DOMAIN,github.akams.cn
+DOMAIN,hub.gitmirror.com
+DOMAIN,gh.jasonzeng.dev
+DOMAIN,mirror.houlang.cloud
+DOMAIN,cors.isteed.cc
+
+# 常用公共 CDN：直连
+DOMAIN-SUFFIX,jsdelivr.net
+DOMAIN,cdnjs.cloudflare.com
+DOMAIN-SUFFIX,unpkg.com
+
+# 国内开发资源及镜像：直连
+DOMAIN-SUFFIX,npmmirror.com
+DOMAIN-SUFFIX,goproxy.cn
+DOMAIN,mirrors.tuna.tsinghua.edu.cn
+DOMAIN,mirrors.ustc.edu.cn
+DOMAIN,mirrors.aliyun.com
+DOMAIN,mirrors.cloud.tencent.com
+DOMAIN,repo.huaweicloud.com
+DOMAIN,mirrors.volces.com
+DOMAIN,mirrors.zju.edu.cn
+DOMAIN,mirrors.sjtug.sjtu.edu.cn
+DOMAIN,mirror.nju.edu.cn
+DOMAIN,mirrors.bfsu.edu.cn

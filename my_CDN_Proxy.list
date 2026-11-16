@@ -4,6 +4,8 @@ DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,githubusercontent.com
 DOMAIN-SUFFIX,githubassets.com
 DOMAIN-SUFFIX,github.dev
+DOMAIN-SUFFIX,ytimg.com
+
 
 # Google 静态资源：代理
 # DOMAIN-SUFFIX,gstatic.com
